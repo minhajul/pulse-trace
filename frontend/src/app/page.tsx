@@ -40,14 +40,16 @@ function Logo() {
 }
 
 export default async function Home() {
-  let stories;
+  let response;
   let error: string | undefined;
 
   try {
-    stories = await fetchStories();
+    response = await fetchStories();
   } catch (err) {
     error = err instanceof Error ? err.message : 'Unknown error';
   }
+
+  const stories = response?.data ?? [];
 
   return (
     <div className="relative flex flex-1 flex-col items-center overflow-hidden bg-background font-sans">
@@ -119,6 +121,13 @@ export default async function Home() {
             {stories ? `${stories.length} ${stories.length === 1 ? 'story' : 'stories'}` : '—'}
           </span>
         </div>
+
+        {response && (
+          <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-500">
+            {response.count} {response.count === 1 ? 'story' : 'stories'} • Last
+            updated {new Date(response.timestamp).toLocaleString()}
+          </p>
+        )}
 
         {error && (
           <div

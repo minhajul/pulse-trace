@@ -5,6 +5,13 @@ export interface Story {
   content: string;
 }
 
+export interface StoriesListResponse {
+  status: 'success';
+  count: number;
+  data: Story[];
+  timestamp: string;
+}
+
 /**
  * Returns the base URL for backend API calls.
  *
@@ -27,12 +34,12 @@ export function getApiBaseUrl(): string {
   return process.env.NEXT_PUBLIC_API_BASE ?? 'http://localhost:5001';
 }
 
-export async function fetchStories(): Promise<Story[]> {
+export async function fetchStories(): Promise<StoriesListResponse> {
   const res = await fetch(`${getApiBaseUrl()}/api/stories`, {
     cache: 'no-store',
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch stories: ${res.status} ${res.statusText}`);
   }
-  return (await res.json()) as Story[];
+  return (await res.json()) as StoriesListResponse;
 }
