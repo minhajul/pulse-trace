@@ -34,17 +34,18 @@ export default async function Home() {
             <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-105 bg-linear-to-b from-indigo-50 via-white to-transparent dark:from-indigo-950/40 dark:via-zinc-950 dark:to-transparent"/>
             <div aria-hidden="true" className="pointer-events-none absolute -top-32 left-1/2 -z-10 h-72 w-160 -translate-x-1/2 rounded-full bg-linear-to-r from-indigo-400/30 to-fuchsia-400/30 blur-3xl dark:from-indigo-500/20 dark:to-fuchsia-500/20"/>
 
-            <main id="stories" className="w-full max-w-3xl flex-1 px-6 pb-24 pt-10">
-                <div className="mb-6 flex items-end justify-between">
-                    <h2 className="text-lg font-semibold tracking-tight">Latest stories</h2>
+            <main id="stories" className="flex w-full max-w-3xl flex-1 flex-col items-center justify-center px-6 py-10">
+                <div className="w-full">
+                    <div className="mb-4 flex items-end justify-between">
+                    <h2 className="text-2xl font-semibold tracking-tight">Latest stories</h2>
                     <span className="text-xs text-muted">
                         {stories ? `${stories.length} ${stories.length === 1 ? 'story' : 'stories'}` : '—'}
                     </span>
                 </div>
 
                 {response && (
-                    <p className="my-2 text-xs text-zinc-500 dark:text-zinc-500">
-                        {response.count} {response.count === 1 ? 'story' : 'stories'} • Last updated {new Date(response.timestamp).toLocaleString()}
+                    <p className="my-3 text-xs text-zinc-500 dark:text-zinc-500">
+                        Last updated {new Date(response.timestamp).toLocaleString()}
                     </p>
                 )}
 
@@ -105,6 +106,7 @@ export default async function Home() {
                         ))}
                     </ul>
                 )}
+                </div>
             </main>
         </div>
     );

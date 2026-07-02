@@ -1,5 +1,12 @@
 import type {Metadata} from "next";
+import {Fira_Code} from "next/font/google";
 import "./globals.css";
+
+const firaCode = Fira_Code({
+    subsets: ["latin"],
+    weight: ["300", "400", "500", "600", "700"],
+    display: "swap",
+});
 
 export const metadata: Metadata = {
     title: "PulseTrace — Stories from the community",
@@ -8,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: Readonly<{ children: React.ReactNode; }>) {
     return (
-        <html lang="en" className="h-full antialiased">
+        <html lang="en" className={`${firaCode.className} h-full antialiased`}>
         <body className="min-h-full flex flex-col">
         {children}
         </body>
