@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { StoriesService } from './stories.service';
+import { StoriesService, StoriesListResponse } from './stories.service';
 
 // Mounted at /api/stories because the top-level Vercel rewrite forwards
 // the original request path. See vercel.json → rewrites.
@@ -8,7 +8,7 @@ export class StoriesController {
   constructor(private readonly storiesService: StoriesService) {}
 
   @Get()
-  findAll() {
+  findAll(): StoriesListResponse {
     return this.storiesService.findAll();
   }
 }

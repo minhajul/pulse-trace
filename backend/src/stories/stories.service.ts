@@ -7,6 +7,13 @@ export interface Story {
   content: string;
 }
 
+export interface StoriesListResponse {
+  status: 'success';
+  count: number;
+  data: Story[];
+  timestamp: string;
+}
+
 @Injectable()
 export class StoriesService {
   private readonly stories: Story[] = [
@@ -47,7 +54,12 @@ export class StoriesService {
     },
   ];
 
-  findAll(): Story[] {
-    return this.stories;
+  findAll(): StoriesListResponse {
+    return {
+      status: 'success',
+      count: this.stories.length,
+      data: this.stories,
+      timestamp: new Date().toISOString(),
+    };
   }
 }
