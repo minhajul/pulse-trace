@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { StoriesService, StoriesListResponse } from './stories.service';
+import { StoriesService, type StoriesListResponse } from './stories.service';
 
 // Mounted at /api/stories because the top-level Vercel rewrite forwards
 // the original request path. See vercel.json → rewrites.
