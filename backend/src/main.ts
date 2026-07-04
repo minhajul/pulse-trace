@@ -17,18 +17,17 @@ const isVercelDeployment =
 
 if (isVercelDeployment) {
   const appPromise = getApp();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   module.exports = async (req: any, res: any) => {
     const app = await appPromise;
     const expressInstance = app.getHttpAdapter().getInstance();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-argument
     return expressInstance(req, res);
   };
 } else {
-  (async () => {
+  await (async () => {
     const app = await getApp();
     const port = Number(process.env.PORT ?? 5001);
     await app.listen(port);
-    // eslint-disable-next-line no-console
     console.log(`Backend listening on http://localhost:${port}`);
   })();
 }
